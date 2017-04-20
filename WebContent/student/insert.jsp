@@ -1,8 +1,10 @@
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    
     <!-- insert.jsp -->
+    <jsp:useBean id="stdao" class="my.student.StudentDAO"/>
+    <!-- Student stdao =new StudentDAO();  같은 역할-->
+    <!-- useBean은 default 생성자를 불러오기 때문에 꼭 존재해야 한다 public -->
 <%
 	String id=request.getParameter("id");
 	String name=request.getParameter("name");
@@ -16,17 +18,7 @@
 	</script>
 <%	return;//_jspservice 메소드를 끝내기 위해서
 	}
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	String url="jdbc:oracle:thin:@localhost:1521:xe";
-	String user="big01";
-	String pass="big01";
-	Connection con=DriverManager.getConnection(url, user, pass);
-	String sql="insert into student values(?,?,?)";
-	PreparedStatement ps=con.prepareStatement(sql);
-	ps.setString(1, id);
-	ps.setString(2, name);
-	ps.setString(3, cname);
-	int res=ps.executeUpdate();
+	int res=stdao.insertStudent(id,name,cname);
 	if(res>0){%>
 		<script type="text/javascript">
 		alert("학생 등록 성공!! 학생 목록페이지로 이동합니다.")

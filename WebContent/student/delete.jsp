@@ -1,5 +1,8 @@
+<%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="java.sql.*"%>
+    pageEncoding="EUC-KR"%>
+    <!-- insert.jsp -->
+    <jsp:useBean id="stdao" class="my.student.StudentDAO"/>
 <%
 	String id=request.getParameter("id");
 	if(id==null||id.trim().equals("")){%>
@@ -9,15 +12,7 @@
 	</script>
 <%	return;//_jspservice 메소드를 끝내기 위해서
 	}
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	String url="jdbc:oracle:thin:@localhost:1521:xe";
-	String user="big01";
-	String pass="big01";
-	Connection con=DriverManager.getConnection(url, user, pass);
-	String sql="delete from student where id=?";
-	PreparedStatement ps=con.prepareStatement(sql);
-	ps.setString(1, id);
-	int res=ps.executeUpdate();
+	int res=stdao.deleteStudent(id);
 	if(res>0){%>
 		<script type="text/javascript">
 		alert("학생 삭제 성공ㅜㅜ 학생 목록페이지로 이동합니다.")
