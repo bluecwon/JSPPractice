@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="java.sql.*"%>
+    pageEncoding="EUC-KR" import="java.util.*, my.book.*"%>
+        <jsp:useBean id="bdao" class="my.book.BookDAO"/>
+    
 <!-- edit_ok.jsp -->
 <%
 		String name = request.getParameter("name");
@@ -12,25 +14,16 @@
 			response.sendRedirect("book.jsp");
 			return;
 		}
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "big01";
-		String pass = "big01";
-		Connection con = DriverManager.getConnection(url, user, pass);
-		String sql = "update book set writer=?, publisher=? where name=?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, writer);
-		ps.setString(2, publisher);
-		ps.setString(3, name);
-		int res = ps.executeUpdate();
+		
+		int res = bdao.modifyBook(name, writer, publisher);
 		if (res>0){%>
 		<script type="text/javascript">
 			alert("도서 수정 성공!! 도서목록페이지로 이동합니다.")
-			location.href="list.jsp"
+			location.href="booklist.jsp"
 		</script>
 	<%	}else { %>
 		<script type="text/javascript">
 			alert("도서 수정 실패!! 도서삭제페이지로 이동합니다.")
-			location.href="book.jsp"
+			location.href="bookmanagement.jsp"
 		</script>
 	<%	} %>

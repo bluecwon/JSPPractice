@@ -1,5 +1,7 @@
+<%@page import="java.util.*, my.book.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR" import="java.sql.*"%>
+    pageEncoding="EUC-KR"%>
+    <jsp:useBean id="bdao" class="my.book.BookDAO"/>
 <html>
 <head>
 <title>학생 목록페이지</title>
@@ -18,27 +20,20 @@
 				<th>입고일</th>
 			</tr>
 			<%
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				String url = "jdbc:oracle:thin:@localhost:1521:xe";
-				String user = "big01";
-				String pass = "big01";
-				Connection con = DriverManager.getConnection(url, user, pass);
-				String sql = "select * from book";
-				PreparedStatement ps = con.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery();
-				int i = 0;
-				while (rs.next()) {
-					i++;
+				ArrayList<BookDTO> list= bdao.listBook();
+				if(list!=null||list.size()!=0){
+					for(BookDTO bdto:list){
 			%>
 			<tr align="center">
-				<td><%=rs.getString("name")%></td>
-				<td><%=rs.getString("writer")%></td>
-				<td><%=rs.getString("publisher")%></td>
-				<td><%=rs.getString("indate")%></td>
+				<td><%=bdto.getName()%></td>
+				<td><%=bdto.getWriter()%></td>
+				<td><%=bdto.getPublisher()%></td>
+				<td><%=bdto.getIndate()%></td>
 			</tr>
 			<%
+					}
 				}
-				if (i == 0) {
+				else{
 			%>
 			<tr>
 				<td colspan="3" align="center">도서 목록이 없습니다.</td>

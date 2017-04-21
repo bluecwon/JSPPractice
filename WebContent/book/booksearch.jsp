@@ -1,6 +1,7 @@
-<%@page import="javax.xml.ws.Response"%>
+<%@page import="java.util.*, my.book.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR" import="java.sql.*"%>
+    pageEncoding="EUC-KR"%>
+    <jsp:useBean id="bdao" class="my.book.BookDAO"/>
 <html>
 <head>
 <title>도서 찾기 페이지</title>
@@ -19,38 +20,26 @@
 			<th>입고일</th>
 		</tr>
 		<%
-			String name = request.getParameter("name");
-			if (name == null || name.trim().equals("")) {
-				response.sendRedirect("bookmanagement.jsp");
-				return;
+		String search = request.getParameter("search");
+		String searchString = request.getParameter("searchString");
+		if (search==null || search.trim().equals("") ||
+				searchString==null || searchString.trim().equals("")){
+			response.sendRedirect("bookmanagement.jsp");
+			return;
 			}
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String user = "big01";
-			String pass = "big01";
-			Connection con = DriverManager.getConnection(url, user, pass);
-			String sql = "select count(*) from book where name=?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, name);
-			ResultSet rs = ps.executeQuery();
-			rs.next();
-			int count = rs.getInt(1);
-			if(count>0){
-				sql = "select * from book where name=?";
-				ps = con.prepareStatement(sql);
-				ps.setString(1, name);
-				rs = ps.executeQuery();
-				while (rs.next()) {
+			
+		ArrayList<BookDTO> list=bdao.searchBook(search,searchString);
+			if(list!=null||list.size()!=0){
+				for(BookDTO bdto:list){
 		%>
 		<tr align="center">
-			<td><%=rs.getString("name")%></td>
-			<td><%=rs.getString("writer")%></td>
-			<td><%=rs.getString("publisher")%></td>
-			<td><%=rs.getString("indate")%></td>
+			<td><%=bdto.getName()%></td>
+			<td><%=bdto.getWriter()%></td>
+			<td><%=bdto.getPublisher()%></td>
+			<td><%=bdto.getIndate()%></td>
 		</tr>
 		<%
-				}
-			}
+				}}
 			else {
 		%>
 		<tr>

@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.eclipse.jdt.internal.compiler.ast.MarkerAnnotation;
-
 public class StudentDAO {
 	private Connection con;
 	private PreparedStatement ps;
