@@ -19,8 +19,8 @@
 				</tr>
 				<tr>
 					<th>주민등록번호</th>
-					<td align="left"><input type="text" name="ssn1" class="box"> - <input
-						type="text" name="ssn2" class="box"></td>
+					<td align="left"><input type="text" name="ssn1" class="box" maxlength="6"> - <input
+						type="text" name="ssn2" class="box" maxlength="7"></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" value="확인"> <input

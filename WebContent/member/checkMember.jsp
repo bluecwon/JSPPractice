@@ -23,13 +23,20 @@
 <%
 	int res = mdao.checkMember(mdto);
 	if(res==0){%>
+		<form name="f" action="../member.jsp" method="post">
+		<input type="hidden" name="name" value="<%=mdto.getName()%>">
+		<input type="hidden" name="ssn1" value="<%=mdto.getSsn1()%>">
+		<input type="hidden" name="ssn2" value="<%=mdto.getSsn2()%>">
+		</form>
 		<script type="text/javascript">
 		alert("회원 아이디가 없습니다. 회원가입 페이지로 넘어갑니다.")
-		location.href="../member.jsp"
+		document.f.submit()
 		</script>
 	<%}else{%>
 	<script type="text/javascript">
-		alert("회원 아이디가 이미 존재합니다. 아이디 찾기페이지로 넘어갑니다.")
-		location.href="../index.jsp"
+		alert("회원 아이디가 이미 존재합니다. 로그인해 주세요.")
+		location.href="../login.jsp"
 		</script>
 	<%}%>
+	
+	<!-- document.f.submit() 히든타입의 form태그를 이동시키는 방법-->
