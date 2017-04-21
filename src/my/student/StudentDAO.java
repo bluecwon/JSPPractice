@@ -24,15 +24,15 @@ public class StudentDAO {
 		pass="big01";
 	}
 	
-	public int insertStudent(String id, String name, String cname) throws SQLException{//finally에서도 예외가 발생할 수 있기 때문에 전가
+	public int insertStudent(StudentDTO stdto) throws SQLException{//finally에서도 예외가 발생할 수 있기 때문에 전가
 		int res=0;
 		String sql="insert into student values(?,?,?)";
 		try{
 			con=DriverManager.getConnection(url,user,pass);
 			ps=con.prepareStatement(sql);
-			ps.setString(1, id);
-			ps.setString(2, name);
-			ps.setString(3, cname);
+			ps.setString(1, stdto.getId());
+			ps.setString(2, stdto.getName());
+			ps.setString(3, stdto.getCname());
 			res=ps.executeUpdate();
 		}finally{
 			if(ps!=null)ps.close();

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR" import="java.util.* , my.student.*"%>
-	<<jsp:useBean id="stdao" class="my.student.StudentDAO"/>
+	<jsp:useBean id="stdao" class="my.student.StudentDAO"/>
+	<% request.setCharacterEncoding("EUC-KR"); %>
 <html>
 <head>
 <title>학생 목록페이지</title>

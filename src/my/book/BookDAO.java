@@ -28,15 +28,15 @@ public class BookDAO {
 		pass="big01";
 	}
 	
-	public int insertBook(String name, String writer, String publisher) throws SQLException{//finally에서도 예외가 발생할 수 있기 때문에 전가
+	public int insertBook(BookDTO bdto) throws SQLException{//finally에서도 예외가 발생할 수 있기 때문에 전가
 		int res=0;
 		String sql="insert into book values(?,?,?,sysdate)";
 		try{
 			con=DriverManager.getConnection(url,user,pass);
 			ps=con.prepareStatement(sql);
-			ps.setString(1, name);
-			ps.setString(2, writer);
-			ps.setString(3, publisher);
+			ps.setString(1, bdto.getName());
+			ps.setString(2, bdto.getWriter());
+			ps.setString(3, bdto.getPublisher());
 			res=ps.executeUpdate();
 		}finally{
 			if(ps!=null)ps.close();

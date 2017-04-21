@@ -2,23 +2,23 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <jsp:useBean id="bdao" class="my.book.BookDAO"/>
+    <% request.setCharacterEncoding("EUC-KR"); %>
+    <jsp:useBean id="bdto" class="my.book.BookDTO"/>
+    <<jsp:setProperty property="*" name="bdto"/>
     
     <!-- insert.jsp -->
 <%
-	String name=request.getParameter("name");
-	String writer=request.getParameter("writer");
-	String publisher=request.getParameter("publisher");
-	if(name==null||writer==null||publisher==null||//페이지를 직접 찾아왔을때
-			name.trim().equals("")||writer.trim().equals("")||publisher.trim().equals("")){%>
+	if(bdto.getName()==null||bdto.getWriter()==null||bdto.getPublisher()==null||//페이지를 직접 찾아왔을때
+			bdto.getName().trim().equals("")||bdto.getWriter().trim().equals("")||bdto.getPublisher().trim().equals("")){%>
 	<script type="text/javascript">
 	alert("도서명 지은이 출판사를 모두 입력하셔야 합니다.")
 	history.back();
 	</script>
 <%	return;
 	}
-	int res=bdao.checkBook(name);
+	int res=bdao.checkBook(bdto.getName());
 	if(res==0){
-		res= bdao.insertBook(name, writer, publisher);
+		res= bdao.insertBook(bdto);
 		if(res>0){%>
 			<script type="text/javascript">
 			alert("도서 등록 성공!! 도서 목록페이지로 이동합니다.")

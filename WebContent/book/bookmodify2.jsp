@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="java.util.*, my.book.*"%>
         <jsp:useBean id="bdao" class="my.book.BookDAO"/>
+            <% request.setCharacterEncoding("EUC-KR"); %>
+        
     
 <!-- edit_ok.jsp -->
 <%

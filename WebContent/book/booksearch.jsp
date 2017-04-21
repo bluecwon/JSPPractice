@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <jsp:useBean id="bdao" class="my.book.BookDAO"/>
+        <% request.setCharacterEncoding("EUC-KR"); %>
+    
 <html>
 <head>
 <title>도서 찾기 페이지</title>
@@ -29,7 +31,7 @@
 			}
 			
 		ArrayList<BookDTO> list=bdao.searchBook(search,searchString);
-			if(list!=null||list.size()!=0){
+			if(list!=null&&list.size()!=0){
 				for(BookDTO bdto:list){
 		%>
 		<tr align="center">
@@ -43,7 +45,7 @@
 			else {
 		%>
 		<tr>
-			<td colspan="3" align="center">해당 도서명을 가지는 책이 존재하지않습니다.</td>
+			<td colspan="4" align="center">해당 도서는 존재하지않습니다.</td>
 		</tr>
 		<%
 			}

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="java.sql.*"%>
+<% request.setCharacterEncoding("EUC-KR"); %>
+    
 <%
 	String name=request.getParameter("name");
 	if(name==null||name.trim().equals("")){%>
