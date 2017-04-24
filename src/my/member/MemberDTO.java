@@ -72,6 +72,11 @@ public class MemberDTO {
 	public void setHp3(String hp3) {
 		this.hp3 = hp3;
 	}
+	public String getAllHp(){
+		if(hp1==null)return"전화없음";else{
+			return hp1+"-"+hp2+"-"+hp3;
+		}
+	}
 	public String getJoindate() {
 		return joindate;
 	}
