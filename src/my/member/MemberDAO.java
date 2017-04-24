@@ -194,4 +194,20 @@ public class MemberDAO {
 		}
 		return mdto;
 	}
+	
+	public ArrayList<MemberDTO> findMember(String search,String searchString) throws SQLException{
+		String sql="select * from jsp_member where "+search+"=?";
+		try{
+			con=DriverManager.getConnection(url,user,pass);
+			ps=con.prepareStatement(sql);
+			ps.setString(1, searchString);
+			rs=ps.executeQuery();
+			ArrayList<MemberDTO> list=makeArrayList(rs);
+			return list;
+		}finally{
+			if(ps!=null)ps.close();
+			if(rs!=null)rs.close();
+			if(con!=null)con.close();
+		}
+	}
 }

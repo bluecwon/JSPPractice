@@ -20,6 +20,7 @@
 			<a href="<%=request.getContextPath()%>/login.jsp">로그인</a> | 
 			<a href="javascript:openMember()">회원가입</a> |
 			<a href="<%=request.getContextPath()%>/member/viewmember.jsp">회원보기</a> |
+			<a href="<%=request.getContextPath()%>/member/memberFind.jsp">회원찾기</a> |
 			<a href="<%=request.getContextPath()%>/company.jsp">회사소개</a></td>
 		</tr>
 		<tr>
