@@ -3,13 +3,28 @@
 <%@ include file="top.jsp"%>
 <!-- login.jsp-->
 <link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript">
+	function loginCheck(){
+		if(f.id.value==""){
+			alert("아이디를 입력하세요")
+			f.id.focus()
+			return
+		}
+		if(!f.passwd.value){
+			alert("비밀번호를 입력하세요")
+			f.passwd.focus()
+			return
+		}
+		document.f.submit()
+	}
+	</script>
 <br>
 <img src="img/bottom.gif" width=570 height="40" border="0" alt="">
 <br>
 <p>
 <img src="img/tm_login.gif" width=100 height="13" border="0" 
 	align=center ALT="회원 로그인">
-<form name="f" action="login_ok.jsp" method="post">
+<form name="f" action="member/login_ok.jsp" method="post">
 	<table width="60%" align="center" height="120">
 		<tr>
 			<td align="right" width="30%">
@@ -35,7 +50,7 @@
 							width="37" height="11" alt="비밀번호">
 			</td>
 			<td>
-				<input type="password" name="pwd"  tabindex="2">
+				<input type="password" name="passwd"  tabindex="2">
 			</td>
 		</tr>
 		<tr>

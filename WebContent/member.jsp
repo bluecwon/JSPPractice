@@ -8,7 +8,22 @@
 <head>
 	<title>회원가입 페이지</title>
 </head>
-	<link rel="stylesheet" type="text/css" href="style.css"> 
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript">
+	function check(){
+		if(f.id.value==""){
+			alert("아이디를 입력하세요")
+			f.id.focus()<!--커서가 이동 -->
+			return
+		}
+		if(!f.passwd.value){
+			alert("비밀번호를 입력하세요")
+			f.passwd.focus()
+			return
+		}
+		document.f.submit()
+	}
+	</script>
 	<body>
 		<form name="f" method="POST" action="member/member_input.jsp">
 			<table width="600" align="center" class="outline">

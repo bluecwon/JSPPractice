@@ -15,4 +15,14 @@
 	<% return;
 	}
 	int res=mdao.inputMember(mdto);
-	%>
+	if(res>0){%>
+	<script type="text/javascript">
+	alert("회원 가입에 성공하였습니다.")
+	self.close()
+	</script>
+	<%} else{%>
+	<script type="text/javascript">
+	alert("회원 가입에 실패하였습니다. 다시 시도해 주세요")
+	location.href="member_Ssn.jsp"
+	</script>
+	<%} %>
