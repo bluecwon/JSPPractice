@@ -21,7 +21,7 @@ public class ConnectionPoolBean {
 	}
 	
 	public synchronized Connection getConnection() throws SQLException {
-		Enumeration<Connection> enkey = ht.keys();
+		Enumeration<Connection> enkey = ht.keys(); //Enumeration iterator와 같은역할
 		Connection con = null;
 		while(enkey.hasMoreElements()){
 			con = enkey.nextElement();

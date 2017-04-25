@@ -2,6 +2,8 @@
     pageEncoding="EUC-KR" import="my.member.*"%>
 <% request.setCharacterEncoding("EUC-KR"); %>
 <jsp:useBean id="mdao" class="my.member.MemberDAO"/>
+<jsp:useBean id="pool" class="my.db.ConnectionPoolBean" scope="application" />
+<jsp:setProperty property="pool" name="mdao" value="<%=pool %>"/>
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	
 	<script type="text/javascript">

@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR"%>
 <html>
 <head>
-<title>회원 가입 유무</title>
+<title>아이디 찾기</title>
 <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
 	<div align="center">
 		<hr color="green" width="300">
-		<h2>회 원 가 입 유 무</h2>
+		<h2>아 이 디 찾 기</h2>
 		<hr color="green" width="300">
-		<form name="f" action="checkMember.jsp" method="post">
+		<form name="f" action="search.jsp" method="post">
+		<input type="hidden" name="mode" value="1">
 			<table width="500" class="outline">
 				<tr>
 					<th>이름</th>

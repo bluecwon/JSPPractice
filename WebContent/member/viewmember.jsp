@@ -1,7 +1,9 @@
 <%@page import="java.util.*, my.member.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <jsp:useBean id="pool" class="my.db.ConnectionPoolBean" scope="application"/>
     <jsp:useBean id="mdao" class="my.member.MemberDAO"/>
+    <jsp:setProperty property="pool" name="mdao" value="<%=pool %>"/>
 <%@ include file="../top.jsp"%>
 <link rel="stylesheet" type="text/css" href="../style.css">
 	<div align="center">

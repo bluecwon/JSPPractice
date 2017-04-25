@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <% request.setCharacterEncoding("EUC-KR"); %>
-<jsp:useBean id="mdao" class="my.member.MemberDAO"/>
+<jsp:useBean id="pool" class="my.db.ConnectionPoolBean" scope="application"/>
+    <jsp:useBean id="mdao" class="my.member.MemberDAO"/>
+    <jsp:setProperty property="pool" name="mdao" value="<%=pool %>"/>
 
 	<%
 	String no=request.getParameter("no");
