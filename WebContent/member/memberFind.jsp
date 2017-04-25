@@ -11,7 +11,7 @@ String searchString = request.getParameter("searchString");
 	<div align="center">
 		<hr color=green width="300">
 		<h2>회 원 찾 기</h2>
-		<form name="f" action="memberFind.jsp" method="post">
+		<form name="f" method="post"><!-- action이 없을땐 자기 자신 -->
 		<select name="search">
 			<option value="id">아이디
 			<option value="name">이름
@@ -36,7 +36,7 @@ String searchString = request.getParameter("searchString");
 					<tr>
 						<td colspan="7" align="center">검색어를 입력해주세요.</td>
 					</tr>
-				<% return;}
+				<%}else{
 				ArrayList<MemberDTO> list= mdao.findMember(search,searchString);
 				if(list!=null&&list.size()!=0){
 					for(MemberDTO mdto:list){
@@ -59,6 +59,7 @@ String searchString = request.getParameter("searchString");
 				<td colspan="7" align="center">해당 회원이 없습니다.</td>
 			</tr>
 			<%
+				}
 				}
 			%>
 		</table>
