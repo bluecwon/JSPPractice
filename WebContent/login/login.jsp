@@ -18,6 +18,17 @@
 		document.f.submit()
 	}
 	</script>
+	<%
+	Cookie cks[]=request.getCookies();
+	String name=null, value=null;
+	if(cks!=null){
+		for(int i=0;i<cks.length;i++){
+			if(cks[i].getName().equals("saveid")){
+				value=cks[i].getValue();
+				break;
+			}
+		}
+	} %>
 <br>
 <img src="../img/bottom.gif" width=570 height="40" border="0" alt="">
 <br>
@@ -32,14 +43,22 @@
 				width="28" height="11" border="0" alt="아이디">&nbsp;&nbsp;
 			</td>
 			<td width="40%">
+			<%if(value!=null){ %>
+				<input type="text" name="id" tabindex="1" value="<%=value%>">
+			<%}else{ %>
 				<input type="text" name="id" tabindex="1">
+			<%} %>
 			</td>
 			<td rowspan="2" width="30%" valign="middle">
 				<a href="javascript:loginCheck()">
 					<img src="../img/bt_login.gif" border="0" alt="로그인"  tabindex="3">&nbsp;&nbsp;<br>
 				</a>
 				<nobr>
+				<%if(value!=null){ %>
+					<input type="checkbox" name="saveId" checked>
+					<%}else{ %>
 					<input type="checkbox" name="saveId">
+					<%} %>
 					<font face="굴림" size="2">아이디 기억하기</font>
 				</nobr>
 			</td>

@@ -59,30 +59,8 @@ public class MemberDAO {
 			ps.setString(2, mdto.getSsn1());
 			ps.setString(3, mdto.getSsn2());
 			rs=ps.executeQuery();
-			rs.next();
+			if(rs.next()){
 			res=rs.getInt(1);
-		}finally{
-			if(ps!=null)ps.close();
-			if(rs!=null)rs.close();
-			if(con!=null)pool.returnConnection(con);
-		}
-		return res;
-	}
-	
-	public boolean loginOk(MemberDTO mdto) throws SQLException{
-		boolean res=false;
-		String sql="select passwd from jsp_member where id=?";
-		try{
-			con=pool.getConnection();
-			ps=con.prepareStatement(sql);
-			ps.setString(1, mdto.getId());
-			rs=ps.executeQuery();
-			rs.next();
-			String passwd =rs.getString("passwd");
-			if(passwd.equals(mdto.getPasswd())){
-				res=true;
-			}else{
-				res=false;
 			}
 		}finally{
 			if(ps!=null)ps.close();

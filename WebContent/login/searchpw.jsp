@@ -27,7 +27,7 @@
 						type="text" name="ssn2" class="box" maxlength="7"></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="submit" value="확인"> <input
+					<td align="center" colspan="2"><input type="submit" value="확인"> <input
 						type="reset" value="취소"></td>
 				</tr>
 			</table>
