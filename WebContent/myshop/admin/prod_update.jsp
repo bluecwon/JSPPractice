@@ -19,7 +19,7 @@
 			location.href("main.jsp")
 		</script>
 	<% return;}
-	String uppath=config.getServletContext().getRealPath("/myshop");
+	String uppath=config.getServletContext().getRealPath("/myshop/images");
 %>
 <div align="center">
 <table border="1" class="outline">
@@ -30,7 +30,7 @@
 	</tr>
 	<tr>
 		<td class="m2">상품번호</td>
-		<td><%=pdto.getPnum()%></td>
+		<td><%=pdto.getPnum()%><input type="hidden" name="pnum" value="<%=pdto.getPnum()%>"></td>
 	</tr>
 	<tr>
 		<td class="m2">상품명</td>
@@ -59,13 +59,14 @@
 	<tr>
 		<td class="m2">상품 스펙</td>
 		<td>
-		<select name="pspec"><%switch(pdto.getPspec()){
-		case "normal":%>
-			<option value="normal" selected> ::NORMAL::
-			<option value="hit"> ::HIT::
-			<option value="best"> ::BEST::
-			<option value="new"> ::NEW::
-		<%}%>
+		<select name="pspec">
+			<%String[] spec={"NORMAL","HIT","BEST","NEW"};
+			for(int i=0;i<spec.length;i++){
+				if(spec[i].equals(pdto.getPspec())){%>
+					<option value="<%=spec[i]%>" selected> ::<%=spec[i]%>::
+				<%}else{%>
+					<option value="<%=spec[i]%>"> ::<%=spec[i]%>::
+			<%}}%>
 		</select>
 		</td>
 	</tr>
@@ -79,7 +80,7 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="submit" value="상품 등록">
+			<input type="submit" value="정보 수정">
 			<input type="reset" value="취소">
 		</td>
 	</tr>

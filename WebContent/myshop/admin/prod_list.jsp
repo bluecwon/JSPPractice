@@ -5,9 +5,19 @@
     <jsp:setProperty property="pool" name="pdao" value="<%=pool %>"/>
 <%@ include file = "top.jsp"%>
 <% request.setCharacterEncoding("EUC-KR");
-String uppath=config.getServletContext().getRealPath("/myshop");
+String uppath=config.getServletContext().getRealPath("/myshop/images");
 %>
-<h5>카테고리 목록</h5>
+<script type="text/javascript">
+	function checkDel(pnum,pimage){
+		check=confirm("정말로 삭제하시겠습니까?")
+		if(check==true){
+		location.href("prod_delete.jsp?pnum="+pnum+"&pimage="+pimage)
+		}else{
+		location.href("prod_list.jsp")
+		}
+	}
+</script>
+<h5>상품 목록</h5>
 <table border="1" width="800" class="outline">
 	<tr bgcolor="yellow" height="10%">
 		<th class="m2">번호</th>
@@ -37,7 +47,7 @@ String uppath=config.getServletContext().getRealPath("/myshop");
 		<td class="box"><%=dto.getPqty() %></td>
 		<td class="box">
 		<a href="prod_update.jsp?pnum=<%=dto.getPnum()%>">수정 |</a>
-		<a href="prod_delete.jsp?pnum=<%=dto.getPnum()%>">삭제</a>
+		<a href="javascript:checkDel('<%=dto.getPnum()%>','<%=dto.getPimage()%>');">삭제</a></td>
 		</td>
 	</tr>
 	<%}

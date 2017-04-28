@@ -135,4 +135,37 @@ public class ProductBean {
 		}
 		return res;
 	}
+	
+	public ArrayList<ProductDTO> listSpecProduct(String pspec) throws SQLException{
+		ArrayList<ProductDTO> list=null;
+		String sql="select * from Product where pspec=?";
+		try{
+			con=pool.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, pspec);
+			rs=ps.executeQuery();
+			list =makeArrayList(rs);
+		}finally{
+			if(ps!=null)ps.close();
+			if(rs!=null)rs.close();
+			if(con!=null)pool.returnConnection(con);
+		}
+		return list;
+	}
+	
+	public ArrayList<ProductDTO> listCateProduct(String cate) throws SQLException{
+		ArrayList<ProductDTO> list=null;
+		String sql="select * from Product where pcategory_fk like '"+cate+"%'";
+		try{
+			con=pool.getConnection();
+			ps=con.prepareStatement(sql);
+			rs=ps.executeQuery();
+			list =makeArrayList(rs);
+		}finally{
+			if(ps!=null)ps.close();
+			if(rs!=null)rs.close();
+			if(con!=null)pool.returnConnection(con);
+		}
+		return list;
+	}
 }

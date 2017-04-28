@@ -19,7 +19,7 @@
 			location.href("main.jsp")
 		</script>
 	<% return;}
-	String uppath=config.getServletContext().getRealPath("/myshop");
+	String uppath=config.getServletContext().getRealPath("/myshop/images");
 %>
 <div align="center">
 <table border="1" class="outline">
@@ -38,7 +38,7 @@
 	</tr>
 	<tr>
 		<td class="m2">상품이미지</td>
-		<td colspan="3">
+		<td colspan="3" align="center">
 		<img src="<%=uppath%>\<%=pdto.getPimage()%>" width="100" height="100">
 		</td>
 	</tr>

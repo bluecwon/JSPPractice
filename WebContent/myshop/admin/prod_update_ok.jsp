@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <%@page import="com.oreilly.servlet.multipart.*"%>
-<%@page import="java.io.IOException"%>
+<%@page import="java.io.*"%>
 <%@page import="com.oreilly.servlet.*"%>
     <% request.setCharacterEncoding("EUC-KR"); %>
  	<jsp:useBean id="pool" class="my.db.ConnectionPoolBean" scope="application"/>
@@ -11,7 +11,7 @@
     <%
 		MultipartRequest mr=null;
 		DefaultFileRenamePolicy dp;
-		String upPath=config.getServletContext().getRealPath("/myshop");
+		String upPath=config.getServletContext().getRealPath("/myshop/images");
 		int len=30*1024*1024;
 		try{
 			dp=new DefaultFileRenamePolicy();
@@ -23,8 +23,12 @@
 		pdto.setPname(mr.getParameter("pname"));
 		pdto.setPcompany(mr.getParameter("pcompany"));
 		pdto.setPimage(mr.getFilesystemName("pimage"));
+		pdto.setPspec(mr.getParameter("pspec"));
 		if(pdto.getPimage()==null){
 			pdto.setPimage(mr.getParameter("pimage1"));
+		}else{
+			File file=new File(upPath+"/"+mr.getParameter("pimage1"));
+			file.delete();
 		}
 		pdto.setPqty(Integer.parseInt(mr.getParameter("pqty")));
 		pdto.setPrice(Integer.parseInt(mr.getParameter("price")));

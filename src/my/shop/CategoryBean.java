@@ -77,4 +77,23 @@ public class CategoryBean {
 		}
 		return res;
 	}
+	
+	public CategoryDTO searchName(String code)throws SQLException{
+		ArrayList<CategoryDTO> list=null;
+		CategoryDTO res=null;
+		String sql="select * from category where code=?";
+		try{
+			con=pool.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, code);
+			rs=ps.executeQuery();
+			list =makeArrayList(rs);
+			res=list.get(0);
+		}finally{
+			if(ps!=null)ps.close();
+			if(rs!=null)rs.close();
+			if(con!=null)pool.returnConnection(con);
+		}
+		return res;
+	}
 }

@@ -46,16 +46,16 @@
 		<td class="m2">상품 스펙</td>
 		<td>
 		<select name="pspec">
-			<option value="normal"> ::NORMAL::
-			<option value="hit"> ::HIT::
-			<option value="best"> ::BEST::
-			<option value="new"> ::NEW::
+			<option value="NORMAL"> ::NORMAL::
+			<option value="HIT"> ::HIT::
+			<option value="BEST"> ::BEST::
+			<option value="NEW"> ::NEW::
 		</select>
 		</td>
 	</tr>
 	<tr>
 		<td class="m2">상품 소개</td>
-		<td><textarea name="pcontents" rows="10" cols="60"></textarea></td>
+		<td><textarea name="pcontents" rows="5" cols="60"></textarea></td>
 	</tr>
 	<tr>
 		<td class="m2">상품 포인트</td>

@@ -1,19 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="java.util.*, my.shop.*"%>
-    <jsp:useBean id="pool" class="my.db.ConnectionPoolBean" scope="application"/>
-    <jsp:useBean id="pdao" class="my.shop.ProductBean"/>
-    <jsp:setProperty property="pool" name="pdao" value="<%=pool %>"/>
-	<%request.setCharacterEncoding("EUC-KR");
-	String pnum=request.getParameter("pnum");
-	int res=pdao.deleteProduct(Integer.parseInt(pnum));
-	if(res>0){%>
-	<script type="text/javascript">
-		alert("삭제에 성공하셨습니다.")
-		location.href("prod_list.jsp")
-	</script>
-	<%} else{%>
-	<script type="text/javascript">
-		alert("삭제에 실패하였습니다. 다시 시도해주세요")
-		location.href("prod_list.jsp")
-	</script>
-	<%} %>
+    pageEncoding="EUC-KR" import="java.io.*"%>
+<jsp:useBean id="pbean" class="my.shop.ProductBean" />
+<jsp:useBean id="pool" class="my.db.ConnectionPoolBean" scope="application"/>
+<jsp:setProperty property="pool" name="pbean" value="<%=pool%>"/>
+
+<%
+		String pnum = request.getParameter("pnum");
+		String pimage = request.getParameter("pimage");
+		if (pnum==null || pnum.trim().equals("")){
+			response.sendRedirect("prod_list.jsp");
+			return;
+		}
+		
+		int res = pbean.deleteProduct(Integer.parseInt(pnum));
+		String msg = null;
+		String url = "prod_list.jsp";
+		if (res>0){
+			String delPath = application.getRealPath("/myshop/images");
+			File file = new File(delPath, pimage);
+			if (file.exists()){
+				file.delete();
+				msg = "상품삭제성공!! 상품목록으로 이동합니다.";
+			}else {
+				msg = "상품삭제성공(이미지삭제는 실패)!! 상품목록으로 이동합니다.";
+			}
+		}else {
+			msg = "상품삭제실패!! 상품목록으로 이동합니다.";
+		}
+%>   
+<script type="text/javascript">
+	alert("<%=msg%>")
+	location.href="<%=url%>"
+</script>

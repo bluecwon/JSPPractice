@@ -11,7 +11,7 @@
     <%
 		MultipartRequest mr=null;
 		DefaultFileRenamePolicy dp;
-		String upPath=config.getServletContext().getRealPath("/myshop");
+		String upPath=config.getServletContext().getRealPath("/myshop/images");
 		int len=30*1024*1024;
 		try{
 			dp=new DefaultFileRenamePolicy();
