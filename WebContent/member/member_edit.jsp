@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="my.member.*"%>
 <% request.setCharacterEncoding("EUC-KR"); %>
+<%@include file="../top.jsp" %>
+
 <jsp:useBean id="mdao" class="my.member.MemberDAO"/>
-<jsp:useBean id="pool" class="my.db.ConnectionPoolBean" scope="application" />
 <jsp:setProperty property="pool" name="mdao" value="<%=pool %>"/>
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	
@@ -24,7 +25,6 @@
 	}
 	MemberDTO mdto=mdao.memberInfo(Integer.parseInt(no));
 	%>
-	<%@include file="../top.jsp" %>
 	<form name="f" method="POST" action="member_editok.jsp">
 			<input type="hidden" name="no" value="<%=mdto.getNo()%>">
 			<table width="600" align="center" class="outline">

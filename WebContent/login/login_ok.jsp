@@ -21,7 +21,7 @@
 		ck.setMaxAge(0);
 	}
 	response.addCookie(ck);
-
+	String mode=request.getParameter("mode");
 	int res = check.memberCheck();
 	String msg = null, url = "login.jsp";
 	switch(res){
@@ -41,6 +41,9 @@
 		session.setAttribute("mbjoindate", lob.getJoindate());
 		msg = lob.getName()+"님, 환영합니다.";
 		url = request.getContextPath()+"/index.jsp";
+		if(mode.equals("2")){
+			url = request.getContextPath()+"/board/list.jsp";	
+		}
 		break;
 	case LoginCheck.NOT_ID :
 		msg = check.getId() +"는 없는 아이디 입니다.";

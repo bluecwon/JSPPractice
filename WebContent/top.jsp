@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    <link rel="stylesheet" type="text/css" href="style.css">
+<jsp:useBean id="pool" class="my.db.ConnectionPoolBean" scope="application"/>
+<link rel="stylesheet" type="text/css" href="style.css">
     
 <html>
 <head>
@@ -17,6 +18,9 @@
 	
 	function searchPw(){
 		window.open("<%=request.getContextPath()%>/login/searchpw.jsp","searchpw","width=650, height=400")
+	}
+	function listBoard(){
+		location.href="<%=request.getContextPath()%>/board/list.jsp"
 	}
 	</script>
 </head>
@@ -39,6 +43,7 @@
 			<a href="javascript:openMember()">회원가입</a> |
 			<a href="<%=request.getContextPath()%>/member/viewmember.jsp">회원보기</a> |
 			<a href="<%=request.getContextPath()%>/member/memberFind.jsp">회원찾기</a> |
+			<a href="<%=request.getContextPath()%>/board/list.jsp">게시판</a> |
 			<a href="<%=request.getContextPath()%>/company.jsp">회사소개</a></td>
 		</tr>
 		<tr><%if(isLogin){%>

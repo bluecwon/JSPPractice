@@ -1,9 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="java.util.*, my.shop.*"%>
 <%@include file="mall_top.jsp" %>
-<jsp:useBean id="pdao" class="my.shop.ProductBean"/>
-<jsp:setProperty property="pool" name="pdao" value="<%=pool %>"/>
+<jsp:useBean id="prolist" class="my.shop.mall.ProductList" scope="session"/>
+<script type="text/javascript">
+	function cartAdd(){
+		check=confirm("장바구니에 담으시겠습까?")
+		if(check==true){
+		document.f.action="mall_cartAdd.jsp";
+		document.f.submit()
+		}else{
+		history.back();
+		}
+	}
+	function order(){
+		check=confirm("즉시구매하시겠습까?")
+		if(check==true){
+		document.f.action="mall_order.jsp";
+		document.f.submit()
+		}else{
+		history.back();
+		}
+	}
+</script>
 <%String spnum=request.getParameter("pnum");
+	String spec=request.getParameter("pspec");
+	String cate=request.getParameter("cate");
 	if(spnum==null||spnum.trim().equals("")){%>
 		<script type="text/javascript">
 			alert("잘못된 접근입니다.")
@@ -11,7 +32,15 @@
 		</script>
 	<%return;}
 	int pnum=Integer.parseInt(spnum);
-	ProductDTO pdto=pdao.searchProduct(pnum);
+	ProductDTO pdto=null;
+	String key=null;
+	if(cate==null||cate.trim().equals("")){
+		pdto=prolist.searchProduct(spec,pnum);
+		key=spec;
+	}else{
+		pdto=prolist.searchProduct(cate,pnum);
+		key=cate;
+	}
 	if(pdto==null){%>
 		<script type="text/javascript">
 			alert("처음부터 다시 시도해주세요")
@@ -29,9 +58,15 @@
 			상품번호 : <%=pdto.getPnum() %><br>
 			상품이름 : <%=pdto.getPname() %><br>
 			상품가격 : <font color="red"><b><%=pdto.getPrice() %></b></font>원<br>
-			상품포인트 : <font color="red"><b><%=pdto.getPoint() %></b></font>point<br>
-			<form name="f" action="" method="post">
-			상품갯수 : <input type="text" name="qty" value="1" maxlength="2" size="3">개
+			상품포인트 : <font color="red"><b>[<%=pdto.getPoint() %>]</b></font>point<br>
+			<form name="f" method="post">
+			<input type="hidden" name="mode" value="2">
+			<input type="hidden" name="pname" value="<%=pdto.getPname()%>">
+			<input type="hidden" name="price" value="<%=pdto.getPrice()%>">
+			<input type="hidden" name="key" value="<%=key %>">
+			<input type="hidden" name="pnum" value="<%=pdto.getPnum() %>">
+			상품갯수 : <input type="text" name="qty" value="1" maxlength="2" size="3">개<br><br>
+			<a href="javascript:cartAdd();">장바구니</a> | <a href="javascript:order()">즉시구매</a>
 			</form>
 		</td>
 	</tr>

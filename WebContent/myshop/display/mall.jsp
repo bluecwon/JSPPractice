@@ -1,76 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 pageEncoding="EUC-KR" import="java.util.*, my.shop.*"%>
 <%@include file="mall_top.jsp" %>
-    <jsp:useBean id="pdao" class="my.shop.ProductBean"/>
-    <jsp:setProperty property="pool" name="pdao" value="<%=pool %>"/>
+    <jsp:useBean id="prolist" class="my.shop.mall.ProductList" scope="session"/>
+    <jsp:setProperty property="pool" name="prolist" value="<%=pool %>"/>
 <% request.setCharacterEncoding("EUC-KR");
 String uppath=config.getServletContext().getRealPath("/myshop/images");
+String[] spec={"HIT","NEW","BEST"};
 %>
 <h3>Welcome to My Mall</h3>
-<%
-	ArrayList<ProductDTO> plist=pdao.listSpecProduct("HIT");
+<%for(int i=0;i<spec.length;i++){
+	ArrayList<ProductDTO> plist=prolist.listSpecProduct(spec[i]);
 	if(plist==null||plist.size()==0){%>
-		<h4><font color="red">히트상품이 없습니다.</font></h4>
+		<h4><font color="red"><%=spec[i]%>상품이 없습니다.</font></h4>
 	<%}else{%>
 		<hr color="green" width="600">
-		<font color="red" size="5" face="굴림"><b>H I T</b></font>
+		<font color="red" size="5" face="굴림"><b><%=spec[i]%></b></font>
 		<hr color="green" width="600">
 		<table width="600">
 		<tr align="center">
 	<%
+	int count=1;
 	for(ProductDTO dto:plist){%>
 	<td align="center">
-		<a href="mall_prodview.jsp?pnum=<%=dto.getPnum()%>"><img src="<%=uppath%>\<%=dto.getPimage()%>" width="80" height="80"></a><br>
+		<a href="mall_prodview.jsp?pspec=<%=spec[i]%>&pnum=<%=dto.getPnum()%>"><img src="<%=uppath%>\<%=dto.getPimage()%>" width="80" height="80"></a><br>
 		<%=dto.getPname()%><br>
 		<font color="red"><%=dto.getPrice()%></font>원<br>
 		[<%=dto.getPoint()%>] Point
 	</td>
-	<%}%>
+	<%
+	count++;
+	if(count>3){count=1;%></tr><tr align="center">
+	<%}
+	}%>
 	</tr>
 	</table>
-	<%}%>
-<%
-	ArrayList<ProductDTO> nlist=pdao.listSpecProduct("NEW");
-	if(nlist==null||nlist.size()==0){%>
-		<h4><font color="red">새상품이 없습니다.</font></h4>
-	<%}else{%>
-		<hr color="green" width="600">
-		<font color="red" size="5" face="굴림"><b>N E W</b></font>
-		<hr color="green" width="600">
-		<table width="600">
-		<tr align="center">
-	<%
-	for(ProductDTO dto:nlist){%>
-	<td align="center">
-		<a href="mall_prodview.jsp?pnum=<%=dto.getPnum()%>"><img src="<%=uppath%>\<%=dto.getPimage()%>" width="80" height="80"></a><br>
-		<%=dto.getPname()%><br>
-		<font color="red"><%=dto.getPrice()%></font>원<br>
-		[<%=dto.getPoint()%>] Point
-	</td>
-	<%}%>
-	</tr>
-	</table>
-	<%}%>
-	<%
-	ArrayList<ProductDTO> blist=pdao.listSpecProduct("BEST");
-	if(blist==null||blist.size()==0){%>
-		<h4><font color="red">베스트상품이 없습니다.</font></h4>
-	<%}else{%>
-		<hr color="green" width="600">
-		<font color="red" size="5" face="굴림"><b>B E S T</b></font>
-		<hr color="green" width="600">
-		<table width="600">
-		<tr align="center">
-	<%
-	for(ProductDTO dto:blist){%>
-	<td align="center">
-		<a href="mall_prodview.jsp?pnum=<%=dto.getPnum()%>"><img src="<%=uppath%>\<%=dto.getPimage()%>" width="80" height="80"></a><br>
-		<%=dto.getPname()%><br>
-		<font color="red"><%=dto.getPrice()%></font>원<br>
-		[<%=dto.getPoint()%>] Point
-	</td>
-	<%}%>
-	</tr>
-	</table>
-	<%}%>
+	<%}
+	}%>
 <%@include file="mall_bottom.jsp" %>

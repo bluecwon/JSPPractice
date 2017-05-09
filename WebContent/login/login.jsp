@@ -19,6 +19,7 @@
 	}
 	</script>
 	<%
+	String mode=request.getParameter("mode");
 	Cookie cks[]=request.getCookies();
 	String name=null, value=null;
 	if(cks!=null){
@@ -70,6 +71,7 @@
 			</td>
 			<td>
 				<input type="password" name="passwd"  tabindex="2">
+				<input type="hidden" name="mode" value="<%=mode%>">
 			</td>
 		</tr>
 		<tr>

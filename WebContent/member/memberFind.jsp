@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="java.util.*, my.member.*"%>
-<jsp:useBean id="pool" class="my.db.ConnectionPoolBean" scope="application"/>
+    <%@ include file="../top.jsp"%>
     <jsp:useBean id="mdao" class="my.member.MemberDAO"/>
     <jsp:setProperty property="pool" name="mdao" value="<%=pool %>"/>
 
-<%@ include file="../top.jsp"%>
+
 <% request.setCharacterEncoding("EUC-KR");
 String search = request.getParameter("search");
 String searchString = request.getParameter("searchString");
