@@ -5,7 +5,6 @@
 <%@ include file="../top.jsp" %>
 <jsp:useBean id="bdb" class="my.board.BoardDataBean" scope="session"/>
 <jsp:useBean id="bdbb" class="my.board.BoardDBBean"/>
-<jsp:setProperty property="pool" name="bdb" value="<%=pool %>"/>
 <link rel="stylesheet" type="text/css" href="../style.css">
 <%
 	String num=request.getParameter("num");

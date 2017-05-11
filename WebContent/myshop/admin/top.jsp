@@ -8,7 +8,7 @@
 </head>
 <div align="center">
 <h2>碱俏隔(包府磊侩)</h2>
-<font color="red"><a href="../display/mall.jsp">碱俏隔权</a> | <a href="main.jsp">皋牢权</a></font>
+<font color="red"><a href="../display/mall.jsp">碱俏隔权</a> | <a href="../../index.jsp">皋牢权</a></font>
 <body>
 	<table border="1" width="800" height="600" class="outline">
 		<tr align="center" height="10%">

@@ -1,16 +1,20 @@
-<%@page import="java.util.*, my.board.*, my.db.*"%>
+<%@page import="java.util.*, my.board.*, my.db.*,java.io.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <% request.setCharacterEncoding("EUC-KR"); %>
 <%@ include file="../top.jsp" %>
 <jsp:useBean id="bdb" class="my.board.BoardDataBean" scope="session"/>
-<jsp:setProperty property="pool" name="bdb" value="<%=pool %>"/>
 <%
 	String num=request.getParameter("num");
 	String passwd=request.getParameter("passwd");
 	if(bdb.checkPass(Integer.parseInt(num), passwd)){
+		String filename=bdb.getFile(Integer.parseInt(num));
 		int res=bdb.deleteBoard(Integer.parseInt(num));
-		if(res>0){%>
+		if(res>0){
+			String delPath = application.getRealPath("/board/downloadfile");
+			File file = new File(delPath, filename);
+			if(file.exists())file.delete();
+		%>
 		<script type="text/javascript">
 		alert("글 삭제에 성공했습니다.")
 		location.href="list.jsp"

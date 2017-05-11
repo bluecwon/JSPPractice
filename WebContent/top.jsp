@@ -12,6 +12,10 @@
 		window.open("<%=request.getContextPath()%>/member/member_Ssn.jsp","check","width=650, height=400")
 	}
 	
+	function openNotice(){
+		window.open("<%=request.getContextPath()%>/notice/alim_open.jsp","check","width=650, height=400")
+	}
+	
 	function searchId(){
 		window.open("<%=request.getContextPath()%>/login/searchid.jsp","searchid","width=650, height=400")
 	}
@@ -44,11 +48,17 @@
 			<a href="<%=request.getContextPath()%>/member/viewmember.jsp">회원보기</a> |
 			<a href="<%=request.getContextPath()%>/member/memberFind.jsp">회원찾기</a> |
 			<a href="<%=request.getContextPath()%>/board/list.jsp">게시판</a> |
+			<a href="<%=request.getContextPath()%>/myshop/display/mall.jsp">쇼핑몰홈</a> |
 			<a href="<%=request.getContextPath()%>/company.jsp">회사소개</a></td>
 		</tr>
-		<tr><%if(isLogin){%>
-			<td align="center" valign="top" width="20%"><b>[<%=mbname%>]님<br> 환영합니다!</b></td>
+		<tr>
+			<td align="center" valign="top" width="20%">
+			<jsp:include page="/count/count.jsp"/><br>
+		<%if(isLogin){%>
+			<b>[<%=mbname%>]님<br> 환영합니다!</b><br>
 		<%}else{ %>
-			<td align="center" valign="top" width="20%"><b>로그인을 해주세요</b></td>
+			<b>로그인을 해주세요</b><br>
 		<%} %>
+			<a href="javascript:openNotice()">공지읽기</a>
+			</td>
 			<td width="80%">

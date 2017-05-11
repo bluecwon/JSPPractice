@@ -5,7 +5,6 @@
 <%@ include file="../top.jsp" %>
 <jsp:useBean id="bdb" class="my.board.BoardDataBean" scope="session"/>
 <jsp:useBean id="bdbb" class="my.board.BoardDBBean"/>
-<jsp:setProperty property="pool" name="bdb" value="<%=pool %>"/>
 <link rel="stylesheet" type="text/css" href="../style.css">
 <script type="text/javascript">
 	function check(){
@@ -44,7 +43,7 @@
 		<hr color=green width="300">
 	</div>
 		<table align="center" border="1" width="600">
-			<form name="f" action="updatePro.jsp" method="post" onsubmit="return check()">
+			<form name="f" action="updatePro.jsp?mode=1" method="post" onsubmit="return check()" enctype="multipart/form-data">
 				<tr>
 					<td class="m2">작성자</td>
 					<td><input type="text" name="writer" value="<%=bdbb.getWriter()%>" readonly></td>
@@ -61,6 +60,10 @@
 				<tr>
 					<td class="m2">내용</td>
 					<td><textarea name="content" rows="13" cols="65"><%=bdbb.getContent()%></textarea></td>
+				</tr>
+				<tr>
+					<td class="m2">파일</td>
+					<td><input type="file" name="filename">| 현재 : <%=bdbb.getFilename()%><input type="button" value="삭제" onclick="window.location='updatePro.jsp?mode=2&num=<%=bdbb.getNum()%>'"></td>
 				</tr>
 				<tr>
 					<td class="m2">비밀번호</td>

@@ -4,7 +4,7 @@
 <% request.setCharacterEncoding("EUC-KR"); %>
 <%@ include file="../top.jsp" %>
 <jsp:useBean id="bdb" class="my.board.BoardDataBean" scope="session"/>
-<jsp:setProperty property="pool" name="bdb" value="<%=pool %>"/>
+
 <link rel="stylesheet" type="text/css" href="../style.css">
 <script type="text/javascript">
 	function check(){
@@ -48,7 +48,7 @@ re_level=request.getParameter("re_level");
 		<hr color=green width="300">
 	</div>
 		<table align="center" border="1" width="600">
-			<form name="f" action="writePro.jsp" method="post" onsubmit="return check()">
+			<form name="f" action="writePro.jsp" method="post" onsubmit="return check()" enctype="multipart/form-data">
 			<input type="hidden" name="re_step" value="<%=re_step%>">
 			<input type="hidden" name="re_level" value="<%=re_level%>">
 				<tr>
@@ -66,6 +66,10 @@ re_level=request.getParameter("re_level");
 				<tr>
 					<td class="m2">내용</td>
 					<td><textarea name="content" rows="13" cols="65"></textarea></td>
+				</tr>
+				<tr>
+					<td class="m2">파일</td>
+					<td><input type="file" name="filename"></td>
 				</tr>
 				<tr>
 					<td class="m2">비밀번호</td>

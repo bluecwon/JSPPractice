@@ -15,11 +15,11 @@
 	<table border="1" width="800" height="600">
 		<tr height="10%">
 			<td colspan="2" align="center">
-			HOME |
+			<a href="<%=request.getContextPath()%>/index.jsp">HOME</a> |
 			<a href="<%=request.getContextPath()%>/myshop/admin/main.jsp">관리자홈</a> |
 			<a href="<%=request.getContextPath()%>/myshop/display/mall.jsp">쇼핑몰홈</a> |
-			장바구니 |
-			회사소개 |
+			<a href="<%=request.getContextPath()%>/myshop/display/mall_cartList.jsp">장바구니</a> |
+			<a href="<%=request.getContextPath()%>/company.jsp">회사소개</a>
 			</td>
 		</tr>
 		<tr>

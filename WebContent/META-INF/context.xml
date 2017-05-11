@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+	<Resource name="jdbc/oracle"
+				auth="Container"
+				driverClassName="oracle.jdbc.driver.OracleDriver"
+				type="javax.sql.DataSource"
+				url="jdbc:oracle:thin:@localhost:1521:xe"
+				username="big01"
+				password="big01"
+				maxAction="20"
+				maxIdle="10"
+				maxWait="-1"/>
+</context>
+<!-- maxaction : 최대 pool갯수
+	maxidle : 사용 안하고 있는 커넥션의 최대수
+	maxWait : 대기시간 -1일경우 즉시
+ -->

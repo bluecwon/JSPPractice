@@ -1,4 +1,4 @@
-<%@page import="java.util.*, my.board.*, my.db.*"%>
+<%@page import="java.util.*, my.board.*, my.db.*, java.io.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <% request.setCharacterEncoding("EUC-KR"); %>
@@ -55,6 +55,21 @@ location.href="../login/login.jsp?mode=2"
 					<td class="m2" align="center" width="25%">글내용</td>
 					<td align="left" colspan="3"><%=bdbb.getContent() %></td>
 				</tr>
+				<%if(bdbb.getFilesize()>0){
+					String upPath=application.getRealPath("/board/downloadfile");
+				%>
+				<tr>
+					<td class="m2" align="center" width="25%">파일명</td>
+					<td align="center" colspan="3">
+					<a href="<%=upPath%>/<%=bdbb.getFilename()%>">
+					<%
+						int pos=bdbb.getFilename().lastIndexOf(".");
+						String ext=bdbb.getFilename().substring(pos+1);
+						if(ext.equals("jpg")||ext.equals("gif")||ext.equals("bmp")||ext.equals("png")){
+					%><img src="<%=upPath%>/<%=bdbb.getFilename()%>" height="100" width="200">
+					<%}else{%><%=bdbb.getFilename()%><%}%></a></td>
+				</tr>
+				<%}%>
 				<tr>
 					<td colspan="4" align="right">
 					<%if(id.equals(bdbb.getWriter())) {%>
